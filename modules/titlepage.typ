@@ -1,10 +1,10 @@
-#let title_page(
+#let generate-title-page(
   title: [], 
   author: "",
   matrikel: none,
   type: none,
   supervisors: (),
-  submission_date
+  submission_date: ""
 ) = {
   set document(author: author, title: title)
   page(    
@@ -16,32 +16,54 @@
     number-align: center,
     [
       #set text(font: "Times New Roman", size: 12pt)
-      #place(top+center, image("../logo-thi.jpg", width: 3cm))
-      #place(center, 
-        dy: 100pt,
+      #place(top+center, 
         box(
           stack(
-            spacing: 1.5cm,
+            spacing: 1cm,
+            image("../logo-thi.jpg", width: 3cm),
             stack(
               spacing: 10pt,
                 text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
                 text(12pt, "Institut für Medientechnologie"),
                 text(12pt, "Fakultät für Elektro-und Informationstechnik"),
                 text(12pt, "Fachgebiet Elektronische Medientechnik"),
-            )
-            text(20pt,weight: "bold", title)          
-          )
+            ),
+          ),
+           
+        ),)
+
+      #place(center+bottom, 
+        dy: -140pt,
+        box(
+          width: 80%,
+          stack(
+            spacing: 2cm,
+            stack(
+            spacing: 1.5cm,
+            text(16pt, "Dissertation"),          
+            text(20pt,weight: "bold", title),
+            text(12pt, "vorgelegt von"),               
+            text(16pt, author),           
+            ),
+              align(left, 
+                [
+                  #stack(spacing: 2pt,
+                    text(12pt, "Supervisors:"),
+                    linebreak(),
+                    for supervisor in supervisors {
+                      text(12pt, supervisor) 
+                      linebreak()
+                    }
+                  )
+                ]
+              ),
+          ),
         ),
-        // text(
-        //   [
-        //     TECHNISCHE UNIVERSITÄT ILMENAU 
-        //     Institut für Medientechnologie 
-        //     Fakultät für Elektro-und Informationstechnik 
-        //     Fachgebiet Elektronische Medientechnik
-        //   ], 
-        //   size: 12pt
-        // )
       )
+      #place(dy: 666pt,
+        center,
+        align(center+bottom,text(12pt, [Ilmenau, #submission_date]))),             
+      
 
 
     ]
