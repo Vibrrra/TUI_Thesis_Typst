@@ -174,6 +174,20 @@
     spacing: 1.35em,
   )
 
+  set ref(
+    supplement: it => context {
+      if it.func() == heading {
+        if in-appendix.get() {
+          [Appendix]
+        } else {
+          [Chapter]
+        }
+      } else {
+        it.supplement
+      }
+    },
+  )
+
   // heading style
   show heading.where(level: 1): it => {
     state("content.switch").update(false)
@@ -215,9 +229,11 @@
       //   ),
       //   heading-number,
       // )
-      // place(dy: -25pt, dx: 0pt, right, [#text(heading-number, fill: rgb("#0188884e"))])
+      // place(dy: -80pt, dx: -20pt, right, [#text(heading-number, fill: rgb("#0188884e"))])
       // v(1.0em)
       stack(
+        align(left)[#text(weight: "bold", [#heading-number])],
+        v(.5em),
         align(left)[#text(weight: "bold", it.body)],
         move(
           polygon(
@@ -226,10 +242,6 @@
             (460pt, 10pt),
             (460pt, 5pt),
             (0pt, 5pt),
-
-            // (35pt, -20pt),
-
-
           )
         )
       )
@@ -373,7 +385,7 @@
 
   // TABLE stuff
   let stroke-color = luma(200)
-  let fill-color = luma(24.02%)
+  let fill-color = luma(53.73%)
   set table(
     inset: 7pt,
     stroke: (0.5pt + stroke-color),
