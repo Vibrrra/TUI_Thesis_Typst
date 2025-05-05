@@ -4,7 +4,8 @@
   matrikel: none,
   type: none,
   supervisors: (),
-  submission_date: ""
+  language: "en",
+  submission_date: datetime,
 ) = {
   set document(author: author, title: title)
   page(    
@@ -43,12 +44,21 @@
             text(16pt, "Dissertation"),          
             text(20pt,weight: "bold", title),
             text(12pt, "vorgelegt von"),               
-            text(16pt, author),           
+            stack(
+              spacing: 1em,
+              text(16pt, author),
+              text(16pt, matrikel),
+            ),           
             ),
               align(left, 
                 [
                   #stack(spacing: 2pt,
-                    text(12pt, "Supervisors:"),
+                    if lang == "de" {
+                      text(12pt, "Betreuer:")
+                    } else {
+                      text(12pt, "Supervisors:")
+                    },
+                    // text(12pt, "Supervisors:"),
                     linebreak(),
                     for supervisor in supervisors {
                       text(12pt, supervisor) 
@@ -62,13 +72,29 @@
       )
       #place(dy: 666pt,
         center,
-        align(center+bottom,text(12pt, [Ilmenau, #submission_date]))),             
-      
-
-
+        align(center+bottom,
+          text(12pt, 
+            [
+              Ilmenau, #submission_date.display("[day]. [month]. [year]")
+            ]
+          )
+        )
+      ),             
     ]
   )
 }
+
+#let generate-supervisor-block(supervisors, lang, thesis-type) = {
+  let num_supervisors = supervisors.len()
+  if lang == "de" {
+    [
+    #text(12pt, "Betreuer:")
+    ]
+  } else {
+    text(12pt, [supervisors, "Supervisors: ", thesis-type])
+  }
+}
+
 //   v(3pt)
 //   align(center,image("logo-thi.jpg", width: 2cm))
 //   align(center,[

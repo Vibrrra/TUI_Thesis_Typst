@@ -1,30 +1,42 @@
 // #import "template/thesis.typ" : thesis
 #import "utils/global.typ" : thesis
 
+#let title = [
+  This is a very long title for an absolutely incredible thesis - not many people can deal with this
+  // This is a very long title for an absolutely incredible thesis - not many people can deal with this
+]
+
 #let epigraph = [
   "What is reality? Obviously, no one can say, because it isn't words. \ It isn't material, that's just an idea. \
   It isn't spiritual, that's also an idea; \ a symbol.""  \ --- Alan Watts.
 ]
 
 #let acknowledgements = [
-  Danke für nichts.
+  Thanks for everything (and nothing).
+]
+
+#let abstract-en = [
+  #lorem(180) #linebreak() #lorem(180)
+]
+
+#let abstract-de = [
+  #lorem(180) #linebreak() #lorem(180)
 ]
 
 #show: thesis.with(
-  title: [
-    This is a very long title for an absolutely incredible thesis - not many people can deal with this
-    // This is a very long title for an absolutely incredible thesis - not many people can deal with this
-  ], 
+  title:title,
   author: "Max Mustermann", 
   thesis-type: "Master Thesis",
   supervisors: (
     "Prof. Dr. Kleist", 
     "Prof. Dr. Hans-Werner Unsinn",
     ),
-  matrikel: "1234567",
-  submission_date: "01.01.2023",
-  abstract: lorem(80),
+  matrikel: "123456",
+  submission_date: datetime(year: 2069, month: 4, day: 20),//"01.01.2023",
+  abstract-en: abstract-en,
+  abstract-de: abstract-de,
   epigraph: epigraph,
-  acknowledgements: acknowledgements
+  acknowledgements: acknowledgements,
+  language: "en",
 
 ) 
