@@ -9,7 +9,7 @@
 #let generate-abstract-en(body) = {
   pagebreak(weak: true, to: "even")
   align(left)[
-    = Kurzfassung
+    = Abstract
     #v(1em)
     #body
   ]

@@ -83,7 +83,7 @@
         align(center+bottom,
           text(12pt, 
             [
-              Ilmenau, #submission_date.display("[day]. [month]. [year]")
+              Ilmenau, #submission_date.display("[day].[month].[year]")
             ]
           )
         )

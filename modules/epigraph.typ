@@ -2,7 +2,7 @@
   page(
     numbering: none,
     align(right + bottom)[
-      #body
+       #text(size: 14pt,body)
     ],
   )
 }

@@ -2,7 +2,7 @@
 #import "utils/global.typ" : thesis
 
 #let title = [
-  This is a very long title for an absolutely incredible thesis - not many people can deal with this
+  This is a very long title and complicated title for an absolutely incredible thesis - not many people can deal with this $ alpha < Theta^2$
   // This is a very long title for an absolutely incredible thesis - not many people can deal with this
 ]
 
@@ -38,5 +38,11 @@
   epigraph: epigraph,
   acknowledgements: acknowledgements,
   language: "de",
-
 ) 
+
+= Introduction <chap:introduction>
+#include "./chapters/example_chapter_1.typ"
+#pagebreak()
+
+
+
