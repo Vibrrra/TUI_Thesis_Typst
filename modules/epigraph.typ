@@ -1,7 +1,7 @@
 #let generate-epigraph(body) = {
   page(
     numbering: none,
-    align(center + horizon) [
+    align(right + bottom)[
       #body
     ],
   )

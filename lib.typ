@@ -7,7 +7,7 @@
 
 // Internal modules
 #import "modules/titlepage.typ" : generate-title-page,
-#import "modules/abstract.typ" : generate-abstract,
+#import "modules/abstract.typ" : generate-abstract-de, generate-abstract-en
 #import "modules/epigraph.typ" : generate-epigraph,
 #import "modules/acknowledgements.typ" : generate-acknowledgements,
 
@@ -93,6 +93,8 @@
   title: [Title],
   // Thesis type: e.g. Master Thesis  
   thesis-type: "Thesis",
+  // Language
+  language: "en",
   // Array of supervisors
   supervisors: (),
   // Date of submission
@@ -100,7 +102,9 @@
   // epigraph (optional)
   epigraph: none,
   // Abstract (mandatory)
-  abstract:  [],
+  abstract-en:  [],
+  abstract-de:  [],
+
   // Acknkowledgements (optional)
   acknowledgements: none,
   // preface (optional)
@@ -137,13 +141,15 @@
     author: author, 
     matrikel: matrikel, 
     supervisors: supervisors, 
-    submission_date: submission_date
+    submission_date: submission_date,
+    language: language,
   )
 
   show: front-matter
   
   generate-epigraph()[#epigraph]
-  generate-abstract()[#abstract]
+  generate-abstract-de()[#abstract-de]
+  generate-abstract-en()[#abstract-en]
   generate-acknowledgements()[#acknowledgements]
   
 

@@ -37,6 +37,6 @@
   abstract-de: abstract-de,
   epigraph: epigraph,
   acknowledgements: acknowledgements,
-  language: "en",
+  language: "de",
 
 ) 

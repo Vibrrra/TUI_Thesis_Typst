@@ -47,13 +47,21 @@
             stack(
               spacing: 1em,
               text(16pt, author),
-              text(16pt, matrikel),
+              if language == "de" 
+              [
+                #text(16pt, [Matrikel: #matrikel])
+              ] 
+              else 
+              [
+                #text(16pt,  [Reg.-Nr.:#matrikel])
+              ]
+              ,
             ),           
             ),
               align(left, 
                 [
                   #stack(spacing: 2pt,
-                    if lang == "de" {
+                    if language == "de" {
                       text(12pt, "Betreuer:")
                     } else {
                       text(12pt, "Supervisors:")
