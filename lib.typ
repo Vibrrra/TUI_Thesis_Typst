@@ -381,21 +381,7 @@
       c.body
     }
   }
-  show link: it => {
-    it
-    // NOTE: Avoid linebreak before link indicators by using a word-joiner unicode character.
-    if type(it.dest) == str {
-      sym.wj
-      h(1.6pt)
-      sym.wj
-      super(
-        box(
-          height: 3.8pt,
-          circle(radius: 1.2pt, stroke: 0.7pt + rgb("#993333")),
-        ),
-      )
-    }
-  }
+  
 
   // TABLE stuff
   let stroke-color = luma(200)
@@ -421,7 +407,7 @@
       sym.wj
       super(
         box(
-          ejght: 3.8pt,
+          height: 3.8pt,
           circle(radius: 1.2pt, stroke: 0.7pt + rgb("#993333"))
         )
       )
