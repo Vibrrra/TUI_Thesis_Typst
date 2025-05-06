@@ -12,15 +12,20 @@
 ]
 
 #let acknowledgements = [
-  Thanks for everything (and nothing).
+  #let n = 0
+  #while n < 150 {
+      n = n + 1
+      [Thanks for everything (and nothing).   \ ]
+
+  }
 ]
 
 #let abstract-en = [
-  #lorem(180) #linebreak() #lorem(180)
+  #lorem(180) //#linebreak() #lorem(180)
 ]
 
 #let abstract-de = [
-  #lorem(180) #linebreak() #lorem(180)
+  #lorem(180) //#linebreak() #lorem(180)
 ]
 
 #show: thesis.with(
@@ -42,6 +47,8 @@
 
 = Introduction <chap:introduction>
 #include "./chapters/example_chapter_1.typ"
+= Figures and Tables 
+#include "./chapters/figures.typ"
 #pagebreak()
 
 

@@ -1,5 +1,5 @@
 #let generate-abstract-de(body) = {
-  pagebreak(weak: true, to: "even")
+  pagebreak(weak: true, to: "odd")
   align(left)[
     = Kurzfassung
     #v(1em)
@@ -7,10 +7,11 @@
   ]
 } 
 #let generate-abstract-en(body) = {
-  pagebreak(weak: true, to: "even")
   align(left)[
     = Abstract
     #v(1em)
     #body
   ]
+  pagebreak(weak: true, to: "odd")
+
 } 

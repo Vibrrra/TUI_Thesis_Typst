@@ -16,6 +16,9 @@
 // Helpers
 #let fill-line(left-text, right-text) = [#left-text #h(1fr) #right-text]
 
+// Colors
+// #let fill-color-gray = rgb("#cd9c47")
+#let fill-color-gray = rgb("#212427")
 
 // Front matter styling rules
 #let front-matter(body) = {
@@ -29,8 +32,9 @@
           center,
           text(
             weight: "thin",
-            // font: "Times New Roman",
-            size: 18pt,
+            fill: fill-color-gray,
+            font: "Times New Roman",
+            size: 8pt,
             counter(page).display(),
           ),
         )
@@ -68,6 +72,7 @@
         text(
           weight: "thin",
           font:"Times New Roman",
+          fill: fill-color-gray,
           size: 8pt,
           fill-line(left-text, right-text)
         )
@@ -96,6 +101,7 @@
           center,
           text(
             weight: "thin",
+            fill: fill-color-gray,
             font: "Times New Roman",
             size: 8pt,
             counter(page).display()  
@@ -161,10 +167,22 @@
 ) = {
 
 
+  // General Document specifics
+  set text(font: ("XCharter"), size: 11pt)
+  show raw: set text(font: "JetBrains Mono")
   set page(
     paper: "a4",
+    margin: (
+      bottom: 5cm,
+      top: 42mm,
+      inside: 33.0mm,
+      outside: 45mm,
+    ),
   )
 
+
+  // set text(stroke-color: rgb(#212427))
+  
   // --- style paragraphs
   // set par(justify: true)
   set par(
@@ -207,11 +225,13 @@
     }
 
     // resetting figure numbering on every chapter start
-    for kind in (image, table, raw) {
-      counter(figure.where(kind: kind)).update(0)
-      counter(math.equation).update(0)
-    }
-
+    
+    
+    // for kind in (image, table, raw) {
+    //   counter(figure.where(kind: kind)).update(0)
+    //   counter(math.equation).update(0)
+    // }
+    
     v(16%)
     if heading.numbering != none {
       // stack(
@@ -239,8 +259,8 @@
           polygon(
             fill: rgb("0188884e"),
             (0pt, 10pt),
-            (460pt, 10pt),
-            (460pt, 5pt),
+            (page.width - page.margin.outside - page.margin.inside , 10pt),
+            (page.width - page.margin.outside - page.margin.inside, 5pt),
             (0pt, 5pt),
           )
         )
@@ -254,6 +274,7 @@
   // headings -> no hyphenation
   show heading: set text(
     font: "Times New Roman",
+    fill: fill-color-gray,
     weight: "bold",
     hyphenate: false,
   )
@@ -385,7 +406,7 @@
 
   // TABLE stuff
   let stroke-color = luma(200)
-  let fill-color = luma(90.59%)
+  let fill-color = luma(91.37%)
   set table(
     inset: 7pt,
     stroke: (0.5pt + stroke-color),
@@ -454,8 +475,11 @@
     submission_date: submission_date,
     language: language,
   )
-
+  
   show: front-matter
+  
+  pagebreak() // Insert a
+  pagebreak() // blank page 
   
   generate-epigraph()[#epigraph]
   generate-abstract-de()[#abstract-de]
@@ -469,7 +493,7 @@
 
 
   // BACK MATTER
-  set text(font: "Times New Roman", size: 12pt)
+  // set text(font: "Times New Roman", size: 12pt)
 }
 
 
