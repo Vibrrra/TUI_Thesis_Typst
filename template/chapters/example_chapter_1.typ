@@ -8,20 +8,54 @@ In this Chapter we will provide you with some basic typst code examples to highl
 
 == Subheading <sub>
 The subheading of chapter @sub[] was created like this: 
- #align(center)[#text("== Subheading")]
+#align(center)[#text("== Subheading")]
+Subsubheadings can be created using `=== Your heading`.\
+Subsubsubheadings can be created using `==== Your heading`. \
+Subsubsubsubheadings can be created using `===== Your heading`.\
+...
 
- Using markdown syntax you can *highlight* _things_ or plain `raw text`.
- Labels for headings and figures or else can be created using the `#label` command and used with `@label[]` to reference them like this one here: @sub[ClickMe] (`== Subheading<sub>  ....   @sub[ClickMe]`).
+== Highliting text elements 
 
- == List<chap:lists>
+Using markdown syntax you can *highlight* _things_ or plain `raw text`.
+Labels for headings and figures or else can be created using the `#label` command and used with `@label[]` to reference them like this one here: @sub[ClickMe] (`== Subheading<sub>  ....   @sub[ClickMe]`).
 
- - Bullet list using `- `
- - bullet 2
- - bullet 3 
+== List<chap:lists>
+Let's look at some lists.
+A simple bullet list can be created like this `- your bullet`.
+ 
+- First item
+- Not the first item
+- Definetly not the first item
+- Last item
 
- + 1
- + 2 
- + 3 
- + using `+`
+#pagebreak()
+ 
+You can also create numbered lists using the `+` symbol.
++ Second.
++ Third.
++ First.
++ Stupid list
+If you need to define a term a term you can you use the `/ TERM: *your definition ` command.
+Example: 
+#align(center,   `/ TERM: Description of the term`)
+yields: 
+#align(center,   [/ TERM: Description of the term])
 
-  
+==== Comments 
+Just write them like this `/* Your Comment */` and they will be hidden in the output.
+You can also comment out whole lines using `//`.
+
+==== Equations & Math-related stuff 
+
+\ *INLINE MATH* \
+You can write inline math like this by enclosing the math formula with `$`(NO SPACE).
+Example:
+#align(center,`$alpha < Theta^2$` ) 
+yields: $alpha < Theta^2$  which nicely integrates into your text.
+
+\ *BLOCK MATH* \
+Or generate block math using `$ *your equation here* $` (With space before and after the `$`). 
+Example:
+#align(center,`$ \alpha < \Theta^2 $` )
+yields: 
+$ alpha < Theta^2 $

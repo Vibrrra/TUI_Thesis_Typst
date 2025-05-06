@@ -381,11 +381,25 @@
       c.body
     }
   }
-
+  show link: it => {
+    it
+    // NOTE: Avoid linebreak before link indicators by using a word-joiner unicode character.
+    if type(it.dest) == str {
+      sym.wj
+      h(1.6pt)
+      sym.wj
+      super(
+        box(
+          height: 3.8pt,
+          circle(radius: 1.2pt, stroke: 0.7pt + rgb("#993333")),
+        ),
+      )
+    }
+  }
 
   // TABLE stuff
   let stroke-color = luma(200)
-  let fill-color = luma(53.73%)
+  let fill-color = luma(90.59%)
   set table(
     inset: 7pt,
     stroke: (0.5pt + stroke-color),
@@ -394,7 +408,7 @@
   show table.cell.where(y: 0): smallcaps
 
   show raw.where(block: false): box.with(
-    fill: fill-color.darken(2%),
+    fill: fill-color.darken(0%),
     inset: (x: 3pt, y: 0pt),
     outset: (y: 3pt),
     radius: 2pt,
