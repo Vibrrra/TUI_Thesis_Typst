@@ -3,18 +3,60 @@
 This is a template for Bachelor and Master thsus or any other work that requires a nice looking template for showing your scientific in written form. 
 You can use this template for your own work. 
 If you need to collaborate with other people on this work you can have a look at #link("https://typst.app")[*typst.app*]. 
-They provide an Online editor for collaborative writing, similar to #link("https://www.overleaf.com")[*Overleaf*] (#LaTeX).  
+They provide an Online editor and hosting of your document as well as the possibility for collaborative writing, similar to #link("https://www.overleaf.com")[*Overleaf*] (#LaTeX).  
+Limited space per project and a stripped-down feature set is *free*.
+
 If you migrate from #LaTeX to Typst the #link("https://typst.app/docs/guides/guide-for-latex-users/")[*Guide for #LaTeX users*] might be helpful.
 Throughout this document you will find some basic Typst examples for typical thesis elements.
 Text elements with a small red circle in the top right corner are clickable and will lead you to the corresponding #link("https://typst.app/docs/reference/")[Typst] documentation.
+The following chapters only a few selected examples taken from the official only resources #footnote("https://typst.app/docs", numbering: "1,") #footnote("https://github.com/typst/typst").
 
-== Installation and ressources
+== Install Typst locally (offline)
 As mentioned above, you can use the #link("https://typst.app")[*typst.app*] online editor for solo and collaborative writing.
 
 If you want to use Typst locally you can find instructions to install Typst on your machine #link("https://github.com/typst/typst")[*HERE*].
-For a productive writing experience you may want to use a Code-editor (e.g., VSCode, Helix, Neovim,...) which supports a Typst Language-Server-Protocoll like *Tinymist*. 
 
 #pagebreak()
+#underline(offset: 2pt)[ *Quickstart* ]\
+
+For Windows users, install via Winget in the console:
+#align(center)[`winget install --id Typst.Typst`]
+Mac users: 
+#align(center)[`brew install typst`]
+Linux: users: 
+#align(center)[View Typst on #link("https://repology.org/project/typst/versions")[Repology] \ or #link("https://snapcraft.io/typst")[Snap]]
+
+Alternatively, you install Typst via the Rust toolchain if available on your on your system:
+#align(center)[latest version: \ `cargo install --locked typst-cli`]
+#align(center)[develop version: \ `cargo install --git https://github.com/typst/typst --locked typst-cli`]
+
+== Basic usage from command line window:
+In your shell of choice (e.g. CMD or PowerShell on Windows) you can run the following commands.
+#align(left)[
+  Create \`file.pdf \` in working directory \
+  #align(center)[`typst compile file.typ`] 
+  Creates PDF file at desired path:
+  #align(center)[`typst compile path/to/source.typ path/to/output.pdf`] 
+  Watches source files and recompiles on changes:
+  #align(center)[`typst watch file.typ`]
+  Lists available subcommands and options:
+  #align(center)[`typst help`]
+  Print detailed info and usage of a subcommand (e.g. typst watch):
+  #align(center)[`typst help watch `]
+]
+
+== Using Typst in an IDE
+For a productive and comfortable writing experience you may want to use a code editor  which supports the @lsp to unlock code highliting, completition, formatting, refactoring... \ \
+Three recommended options:
+- #link("https://code.visualstudio.com/")[VSCode]
+- #link("https://helix-editor.com/")[Helix]
+- #link("https://neovim.io/")[Neovim] (if you dare)
+Best language server option for Typst as of now: The #link("https://github.com/Myriad-Dreamin/tinymist")[*Tinymist*] language server.
+(Available as VSCode Extension ) 
+
+#figure(caption: flex-caption([Using VSCode Editor for writing a Typst document. The Tinymist extension allows for syntax highliting as well as live-preview with hot-reload in keypress for instant viewing your changes.],[VSCode]))[#image("../../screenshot.png")]
+
+// #pagebreak()
 
 == The basics about Typst syntax
 
@@ -54,10 +96,10 @@ A simple bullet list can be created like this `- your bullet`.
 - First item
   - Sub-first item
     - Subsub-first item
-      - Subsbusb-first item
+      - @drr
 - Not the first item
 - Definetly not the first item
-- Last item
+- Last item (@drr)
 
 // #pagebreak()
  
@@ -72,11 +114,13 @@ Example:
 yields: 
 #align(center,   [/ TERM: Description of the term])
 
-==== Comments 
+=== Comments 
 Just write them like this `/* Your Comment */` and they will be hidden in the output.
 You can also comment out whole lines using `//`.
 
-==== Equations & Math-related stuff 
+=== Equations & Math-related stuff 
+Math equations are constructed similar to #LaTeX. Math mode is created by wrapping the formula in `$`-signs.
+You can insert equation inlined or as a numbered stand-alone block.
 
 \ *INLINE MATH* \
 You can write inline math like this by enclosing the math formula with `$`(NO SPACE).
@@ -90,3 +134,5 @@ Example:
 #align(center,`$ \alpha < \Theta^2 $` )
 yields: 
 $ alpha < Theta^2 $
+
+Block equations are consecutivley numbered like this `2.13`, where 2 and 13 would denote the chapter-number and global equation-count, respectively.

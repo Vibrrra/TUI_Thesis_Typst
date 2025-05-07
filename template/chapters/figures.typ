@@ -1,5 +1,4 @@
 #import "../utils/global.typ" : *
-
 #figure(
   caption: [
     This symbol was found at one the ruins on the Attle Rock. 
@@ -23,7 +22,9 @@ The label is used to reference the figure in the text. You can use the `@` symbo
 #subpar.grid(
   columns: (1fr,1fr,1fr),
   align: (horizon, horizon, horizon),
-  caption: [This is an example of how to place subfigure. You can also reference, e.g. `@a` which produces @a or @d],
+  caption: flex-caption(
+    [This is an example of how to place subfigure. You can also reference, e.g. `@a` which produces @a or @d],
+    [First Figure Example]),
   figure(image("../../EotU.jpg"), caption: ""),<a>,
   figure(image("../../EotU.jpg"), caption: ""),<b>,
   figure(image("../../EotU.jpg"), caption: ""),<c>,
@@ -98,17 +99,9 @@ caption: [This is an example of a table. You can also reference, e.g. `@tab:Tabl
 )<tab:Table1>
 ]
 
+$ a = b $
 However, if you need to customize the table you can override the default styling of the table, look at the source code  of @tab:Table2. It was created in scope `#[ ]`. Thos allows to override the default styling of the table within this scope.
 You can also include images and math equations in the table. The table will automatically adjust the size of the columns and rows to fit the content.
-
-#[
-  
-  // #show figure.where(kind: table): set figure.caption(position: bottom)
-  #set table.hline(stroke: 0.6pt + fill-color-gray )
-  #set math.equation(
-    numbering: n => {
-    },
-  )
 
 #let small_tab = [
   #set text(size: 8pt)
@@ -122,44 +115,88 @@ You can also include images and math equations in the table. The table will auto
   [#table.cell(fill: gray)[Georg]],[5],[#table.cell(fill: yellow)[7]],
 )]
 
-
 #figure()[#small_tab]
 #place(
   top, dx: 0.5em, dy: 17.0cm,
 )[#rotate(-10deg)[#text(size: 24pt,"Ignore this small table. This ist just for testing purposes. AAAAAAAAA", fill: rgb("#864949"))]]
 
 
-#figure(
+#let dont-count-math-eq = {  
+
+  // show: math.equation
+}
+
+#[
   
+  // #show figure.where(kind: table): set figure.caption(position: bottom)
+  #set table.hline(stroke: 0.6pt + fill-color-gray )
+  // show: dont-count-math-eq
+  #set math.equation(
+    numbering: n => {
+      let p = counter(math.equation).get().first()
+      counter(math.equation).update(p => p -1)
+    },
+  )
 
-
-table(
-  stroke: none,
-  inset: 1pt,
-  column-gutter: 15pt,
-  // row-gutter: 0pt,
-  row-gutter: auto,
-  columns: 3,
-  // generell alignment rules
-  align: (horizon, left + horizon, left + horizon),
-  table.header([Substance], [Effective Dosage], [Misc]),
-  table.hline(start: 0),
-  [Nutella],[1 table spoon], [hot take:  \ better with butter],
-  table.hline(start: 2),
-  [Coffee],[1 cup], [10 cups (ask Lukas)],
-  [],[],[],
-  [], table.cell(colspan: 2)[#align(center)[*Shai-Hulud* recommends]], 
-  table.hline(start: 1),
-  [Spice], [1 sniff], [10 sniffs],
-  [#image("../../logo-thi.jpg", width: 30%)], [10 courses],[#text()[$ integral_0^infinity x / ((sin(x)/d) +2 )    d x $]],
-    [McRib], [1 McRib], [1 McRib],
-    [Table], [#small_tab], [#box(fill: blue)[#small_tab]]
-),
-caption: [This is an example of a complex table. You can also reference, e.g. `@tab:Table2`. 
-This table uses custom styling in a seperate scope. This table features text, images and math equations and even other tables.], 
-)<tab:Table2>
+  #figure(
+  table(
+    stroke: none,
+    inset: 1pt,
+    column-gutter: 15pt,
+    // row-gutter: 0pt,
+    row-gutter: auto,
+    columns: 3,
+    // generell alignment rules
+    align: (horizon, left + horizon, left + horizon),
+    table.header([Substance], [Effective Dosage], [Misc]),
+    table.hline(start: 0),
+    [Nutella],[1 table spoon], [hot take:  \ better with butter],
+    table.hline(start: 2),
+    [Coffee],[1 cup], [10 cups (ask Lukas)],
+    [],[],[],
+    [], table.cell(colspan: 2)[#align(center)[*Shai-Hulud* recommends]], 
+    table.hline(start: 1),
+    [Spice], [1 sniff], [10 sniffs],
+    [#image("../../logo-thi.jpg", width: 30%)], [10 courses],[#text()[$ integral_0^infinity x / ((sin(x)/d) +2 )    d x $]],
+      [McRib], [1 McRib], [1 McRib],
+      [Table], [#small_tab], [#box(fill: blue)[#small_tab]]
+  ),
+  caption: [This is an example of a complex table. You can also reference, e.g. `@tab:Table2`. 
+  This table uses custom styling in a seperate scope. This table features text, images and math equations and even other tables.], 
+  )<tab:Table2>
 ]
 
+On the next page we are going to check out some Code listings!
+#pagebreak()
 
+== Code Listings
+Let's make a small listing. Code blocks are also wrapped in a caption. \
+Like this: 
+#align(center)[
+  #raw(
+"#figure()[
+     ```rust    
+                  println!(\"yeah\"); 
+```]")
+] 
 
-
+Code highliting is supported for a a lot of languages. 
+This is what Rust Code (@code:rust_1) looks like in the Code Block. 
+Adding a caption registers the code bock to the List of Listings - Outline in the front matter section.
+#figure(caption: 
+  flex-caption([This function's only purpose is to print out the agony of Stephan after seeing with another "Underfull Box (Badness: 10000)" Warning],[useless Rust function]),
+)[
+  ```rust
+    // This main function doesn't do shnit
+    pub fn main() {
+      let g: i32 = 0;
+      let mut aah: String = String::new();
+      aah.push("A");
+      for i in 0..10 {
+        aah.push("a");
+      }
+      aah.push("h!")
+      println!("Stephan yells: {}", &aah);
+    }  
+  ```
+]<code:rust_1>

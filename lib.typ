@@ -10,11 +10,42 @@
 #import "modules/abstract.typ" : generate-abstract-de, generate-abstract-en
 #import "modules/epigraph.typ" : generate-epigraph,
 #import "modules/acknowledgements.typ" : generate-acknowledgements,
+#import "modules/abbreviations.typ" : abbreviations-page,
 
+#let in-appendix = state("in-appendix", false)
+#let in-outline = state("in-outline", false)
 
+#let flex-caption(long, short) = context if in-outline.get() { short } else {long}
 
 // Helpers
 #let fill-line(left-text, right-text) = [#left-text #h(1fr) #right-text]
+
+#let code-block(filename, content) = raw(content, block: true, lang: filename
+  .split(".")
+  .at(-1))
+
+#let csv-table(
+  tabledata: "",
+  columns: 1,
+  header-row: rgb(255, 231, 230),
+  even-row: rgb(255, 255, 255),
+  odd-row: rgb(228, 234, 250),
+) = {
+  let tableheadings = tabledata.first()
+  let data = tabledata.slice(1).flatten()
+  table(
+    columns: columns, fill: (_, row) => if row == 0 {
+      header-row // color for header row
+    } else if calc.odd(row) {
+      odd-row // each other row colored
+    } else {
+      even-row
+    }, align: (col, row) => if row == 0 { center } else {
+      left
+    }, ..tableheadings.map(x => [*#x*]), // bold headings
+    ..data,
+  )
+}
 
 // Colors
 // #let fill-color-gray = rgb("#cd9c47")
@@ -130,6 +161,7 @@
   body
 }
 
+
 #let thesis(
   // Author name
   author: "Author",
@@ -158,15 +190,27 @@
   // bibliography (optional)
   bibliography: none,
   // Display a list of all figures
-  figure-list: true,
+  figure-index: true,
   // Display a list of all tables
-  table-list: true,
+  table-index: true,
+  // Display a list of code blocks
+  listing-index: true,
   // List of abbreviations
   abbreviations: none,
   // your work
   body
 ) = {
 
+
+  show: make-glossary
+  // Display short-form abbreviations (smallcaps)
+  let abbrs = abbreviations.map(a => {
+    a.insert("short", smallcaps(a.short))
+    return a
+  })
+  register-glossary(abbrs)
+
+  
 
   // General Document specifics
   set text(font: ("XCharter"), size: 11pt)
@@ -225,6 +269,7 @@
       )
     }
 
+    
     // resetting figure numbering on every chapter start
     
     
@@ -490,6 +535,7 @@
     supervisors: supervisors, 
     submission_date: submission_date,
     language: language,
+    thesis-type: thesis-type,
   )
   
   show: front-matter
@@ -502,7 +548,98 @@
   generate-abstract-en()[#abstract-en]
   generate-acknowledgements()[#acknowledgements]
   
+  // Outline
+  context {
+    
+    // for convenience
+    let fig-t(kind) = figure.where(kind: kind)
 
+    // `in-outline`: short caption in list of figures
+    show outline: it => {
+      in-outline.update(true)
+      
+      // show table of contents, list of figures, list of tables, etc. in the table of contents
+      set heading(outlined: true)
+      it
+      in-outline.update(false)
+    }
+
+    // Increase distance between dots on all outline fill
+    set outline.entry(fill: box(width: 1fr, repeat([#h(2.5pt) . #h(2.5pt)])))
+
+    pagebreak()
+
+    // Padding for outline entries
+    let entry-spacing-left = 0.25em
+    let entry-spacing-right = 22pt
+
+    [
+      #show outline.entry: it => context {
+
+        let page-number-spacing = (
+          entry-spacing-right - measure(it.page()).width
+        )
+        link(it.element.location(), it.indented(
+          it.prefix() + h(entry-spacing-left),
+          it.body()
+            + h(entry-spacing-left)
+            + box(width: 1fr, it.fill)
+            + h(page-number-spacing)
+            + it.page()
+        ))
+      }
+
+      #show outline.entry.where(level: 1): it => {
+        set text(weight: "bold")
+        set block(above: 1.5em)
+        link(it.element.location(), it.indented(
+          it.prefix(),
+          it.body() + box(width: 1fr, none) + it.page(),
+        ))
+      }
+
+      #outline(title: "Contents")
+    ]
+
+    show outline.entry: it => context {
+      let prefix = {
+        show "Figure": ""
+        show "Table": ""
+        show "Listing": ""
+        set text(weight: "bold")
+        it.prefix()
+      }
+
+      // calculate relatiev spacing, to line up fill regardless of page number width
+      let page-number-spacing = entry-spacing-right - measure(it.page()).width
+      link(it.element.location(), it.indented(
+        prefix + h(entry-spacing-left),
+        it.body()
+          + h(entry-spacing-left)
+          + box(width: 1fr, it.fill)
+          + h(page-number-spacing)
+          + it.page()
+      ))
+    }
+
+    // optional outlines
+    if figure-index {
+      outline(title: "List of Figures", target: fig-t(image))
+    }
+
+    if table-index {
+      outline(title: "List of Tables", target: fig-t(table))
+    }
+    if listing-index {
+      outline(title: "List of Listings (Code Blocks)", target: fig-t(raw))
+    }
+
+  }
+
+  if abbreviations != none {
+    abbreviations-page(abbreviations)
+  }
+   
   // MAIN MATTER
   show: main-matter
   body

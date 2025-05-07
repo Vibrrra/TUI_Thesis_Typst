@@ -2,7 +2,7 @@
   title: [], 
   author: "",
   matrikel: none,
-  type: none,
+  thesis-type: [],
   supervisors: (),
   language: "en",
   submission_date: datetime,
@@ -41,9 +41,15 @@
             spacing: 2cm,
             stack(
             spacing: 1.5cm,
-            text(16pt, "Dissertation"),          
+            text(16pt, thesis-type),          
             text(20pt,weight: "bold", title),
-            text(12pt, "vorgelegt von"),               
+            text(12pt,[
+              #if language == "de" {
+                "vorgelegt von" 
+              } else {
+                "submitted by"
+                }
+            ]),               
             stack(
               spacing: 1em,
               text(16pt, author),
@@ -100,6 +106,27 @@
     ]
   } else {
     text(12pt, [supervisors, "Supervisors: ", thesis-type])
+  }
+}
+
+#let title_header(lang) = {
+  
+  if lang == "de" {
+    stack(
+      spacing: 10pt,
+        text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
+        text(12pt, "Institut für Medientechnologie"),
+        text(12pt, "Fakultät für Elektro-und Informationstechnik"),
+        text(12pt, "Fachgebiet Elektronische Medientechnik"),
+    )
+  } else {
+    stack(
+      spacing: 10pt,
+        text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
+        text(12pt, "Institute of Media Technology"),
+        text(12pt, "Department of Electrical Engineering and Information Technology"),
+        text(12pt, "Electronic Media Technology Group"),
+    )
   }
 }
 

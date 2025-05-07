@@ -1,8 +1,9 @@
 // #import "template/thesis.typ" : thesis
-#import "utils/global.typ" : thesis
+#import "utils/global.typ" : thesis, LaTeX
+#import "abbreviations.typ" : abbreviations-list
 
 #let title = [
-  This is a very long title and complicated title for an absolutely incredible thesis - not many people can deal with this $ alpha < Theta^2$
+  This is a very long title and complicated title for an absolutely incredible introduction to Typst - The LaTeX Killer
   // This is a very long title for an absolutely incredible thesis - not many people can deal with this
 ]
 
@@ -31,7 +32,7 @@
 #show: thesis.with(
   title:title,
   author: "Max Mustermann", 
-  thesis-type: "Master Thesis",
+  thesis-type: "Masterarbeit",
   supervisors: (
     "Prof. Dr. Kleist", 
     "Prof. Dr. Hans-Werner Unsinn",
@@ -43,6 +44,7 @@
   epigraph: epigraph,
   acknowledgements: acknowledgements,
   language: "de",
+  abbreviations: abbreviations-list,
 ) 
 
 = Introduction <chap:introduction>
