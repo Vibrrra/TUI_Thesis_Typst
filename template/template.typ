@@ -13,7 +13,7 @@
 
 #let acknowledgements = [
   #let n = 0
-  #while n < 150 {
+  #while n < 20 {
       n = n + 1
       [Thanks for everything (and nothing).   \ ]
 
