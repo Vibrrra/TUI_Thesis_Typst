@@ -19,6 +19,7 @@
 // Colors
 // #let fill-color-gray = rgb("#cd9c47")
 #let fill-color-gray = rgb("#212427")
+#let box-color = rgb("#b3d0e7")
 
 // Front matter styling rules
 #let front-matter(body) = {
@@ -33,7 +34,7 @@
           text(
             weight: "thin",
             fill: fill-color-gray,
-            font: "Times New Roman",
+            font: "XCharter",
             size: 8pt,
             counter(page).display(),
           ),
@@ -71,7 +72,7 @@
         }
         text(
           weight: "thin",
-          font:"Times New Roman",
+          font:"XCharter",
           fill: fill-color-gray,
           size: 8pt,
           fill-line(left-text, right-text)
@@ -102,7 +103,7 @@
           text(
             weight: "thin",
             fill: fill-color-gray,
-            font: "Times New Roman",
+            font: "XCharter",
             size: 8pt,
             counter(page).display()  
           ),
@@ -210,9 +211,9 @@
   show heading.where(level: 1): it => {
     state("content.switch").update(false)
     // start chapter headings on odd-page
-    pagebreak(weak: true, to: "odd")
+    pagebreak(weak: true, to: "even")
     state("content.switch").update(true)
-    set text(font: "Sans Serif Collection", weight: "bold", size: 24pt)
+    set text(font: "XCharter", weight: "bold", size: 24pt)
   
     let heading-number = if heading.numbering == none {
       []
@@ -273,7 +274,7 @@
 
   // headings -> no hyphenation
   show heading: set text(
-    font: "Times New Roman",
+    font: "XCharter",
     fill: fill-color-gray,
     weight: "bold",
     hyphenate: false,
@@ -359,7 +360,7 @@
           }
           text(
             weight: "thin",
-            font: "Times New Roman",
+            font: "XCharter",
             size: 8pt,
             fill-line(upper(left-text), upper(right-text)),
           )
@@ -373,7 +374,7 @@
     numbering: n => {
       set text(font: ("XCharter"))
       let h1 = counter(heading).get().first()
-      numbering("(1.1", h1, n)  
+      numbering("(1.1)", h1, n)  
     },
   )
 
@@ -403,16 +404,31 @@
     }
   }
   
+  // Set figure caption to top of figure in case of table
+  show figure.where(kind: table): set figure.caption(position: top)
+
+  // Add spacing around figure. Figure inherits Block so we can do the following:
+  show figure: set block(inset: (top: 0.5em, bottom: 0.5em))
+
 
   // TABLE stuff
   let stroke-color = luma(200)
   let fill-color = luma(91.37%)
   set table(
-    inset: 7pt,
-    stroke: (0.5pt + stroke-color),
+    inset: 5pt,
+    // stroke: (0.5pt + stroke-color),
+    stroke: (x,y) => if y == 0 {
+      (bottom: 0.7pt + fill-color-gray)
+    }, 
+    align: (x, y) => (
+      if x > 0 { center }
+      else { left}
+    )
   )
 
+  show table.cell.where(y: 0): strong
   show table.cell.where(y: 0): smallcaps
+
 
   show raw.where(block: false): box.with(
     fill: fill-color.darken(0%),

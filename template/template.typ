@@ -7,8 +7,8 @@
 ]
 
 #let epigraph = [
-  "What is reality? Obviously, no one can say, because it isn't words. \ It isn't material, that's just an idea. \
-  It isn't spiritual, that's also an idea; \ a symbol.""  \ --- Alan Watts.
+  "What is reality?  \ Obviously, no one can say, because it isn't words. \ It isn't material, that's just an idea. \
+  It isn't spiritual, that's also an idea; \ a symbol..."  \  --- Alan Watts.
 ]
 
 #let acknowledgements = [
@@ -47,7 +47,7 @@
 
 = Introduction <chap:introduction>
 #include "./chapters/example_chapter_1.typ"
-= Figures and Tables 
+= Figures and tables 
 #include "./chapters/figures.typ"
 #pagebreak()
 
