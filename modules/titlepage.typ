@@ -1,3 +1,25 @@
+#let title_header(lang) = {
+  
+  if lang == "de" {
+    stack(
+      spacing: 10pt,
+        text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
+        text(12pt, "Institut für Medientechnologie"),
+        text(12pt, "Fakultät für Elektro-und Informationstechnik"),
+        text(12pt, "Fachgebiet Elektronische Medientechnik"),
+    )
+  } else {
+    stack(
+      spacing: 10pt,
+        text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
+        text(12pt, "Institute of Media Technology"),
+        text(12pt, "Department of Electrical Engineering and Information Technology"),
+        text(12pt, "Electronic Media Technology Group"),
+    )
+  }
+}
+
+
 #let generate-title-page(
   title: [], 
   author: "",
@@ -22,13 +44,14 @@
           stack(
             spacing: 1cm,
             image("../logo-thi.jpg", width: 3cm),
-            stack(
-              spacing: 10pt,
-                text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
-                text(12pt, "Institut für Medientechnologie"),
-                text(12pt, "Fakultät für Elektro-und Informationstechnik"),
-                text(12pt, "Fachgebiet Elektronische Medientechnik"),
-            ),
+            title_header(language)
+            // stack(
+            //   spacing: 10pt,
+            //     text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
+            //     text(12pt, "Institut für Medientechnologie"),
+            //     text(12pt, "Fakultät für Elektro-und Informationstechnik"),
+            //     text(12pt, "Fachgebiet Elektronische Medientechnik"),
+            // ),
           ),
            
         ),)
@@ -109,26 +132,6 @@
   }
 }
 
-#let title_header(lang) = {
-  
-  if lang == "de" {
-    stack(
-      spacing: 10pt,
-        text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
-        text(12pt, "Institut für Medientechnologie"),
-        text(12pt, "Fakultät für Elektro-und Informationstechnik"),
-        text(12pt, "Fachgebiet Elektronische Medientechnik"),
-    )
-  } else {
-    stack(
-      spacing: 10pt,
-        text(12pt, "TECHNISCHE UNIVERSITÄT ILMENAU"),
-        text(12pt, "Institute of Media Technology"),
-        text(12pt, "Department of Electrical Engineering and Information Technology"),
-        text(12pt, "Electronic Media Technology Group"),
-    )
-  }
-}
 
 //   v(3pt)
 //   align(center,image("logo-thi.jpg", width: 2cm))
