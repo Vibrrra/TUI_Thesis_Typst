@@ -5,7 +5,7 @@
     According to script fragments found near the side, it represents what the Nomai refer to as the _Eye of the Universe_.], 
     [Eye of the Universe]), 
 )[
-#image("../../EotU.jpg", width: 50%)
+#image("../images/EotU.jpg", width: 50%)
 ]<dd>
 
 
@@ -26,11 +26,11 @@ The label is used to reference the figure in the text. You can use the `@` symbo
   caption: flex-caption(
     [This is an example of how to place subfigure. You can also reference, e.g. `@a` which produces @a or @d],
     [First Figure Example]),
-  figure(image("../../EotU.jpg"), caption: ""),<a>,
-  figure(image("../../EotU.jpg"), caption: ""),<b>,
-  figure(image("../../EotU.jpg"), caption: ""),<c>,
-  figure(image("../../EotU.jpg"), caption: ""),<d>,
-  figure(image("../../EotU.jpg"), caption: ""),<e>,
+  figure(image("../images/EotU.jpg"), caption: ""),<a>,
+  figure(image("../images/EotU.jpg"), caption: ""),<b>,
+  figure(image("../images/EotU.jpg"), caption: ""),<c>,
+  figure(image("../images/EotU.jpg"), caption: ""),<d>,
+  figure(image("../images/EotU.jpg"), caption: ""),<e>,
   // figure(image("../../EotU.jpg"), caption: ""),<f>,
   // figure([There can also be text in here. In don't know why one would every need this. Anyway... \ \  ], caption: ""),<f>,
   figure([There can also be text in here. In don't know why one would every need this. Anyway... \ ] , caption: ""),<f>,
@@ -63,15 +63,15 @@ This way you can insert empty (`[]`) block which centers the remaining 2 subfigu
     [Odd number of subfigures]),
   [
     #grid( columns: (1fr, 1fr, 1fr),
-      [#figure(image("../../EotU.jpg"), caption: "", )<odd_subfigs_a>], 
-      [#figure(image("../../EotU.jpg"), caption: "", )<odd_subfigs_b>], 
-      [#figure(image("../../EotU.jpg"), caption: "", )<odd_subfigs_c>], 
+      [#figure(image("../images/EotU.jpg"), caption: "", )<odd_subfigs_a>], 
+      [#figure(image("../images/EotU.jpg"), caption: "", )<odd_subfigs_b>], 
+      [#figure(image("../images/EotU.jpg"), caption: "", )<odd_subfigs_c>], 
     )
   
     #grid( columns: (1fr, 2fr, 2fr, 1fr),
       [],
-      [#figure(image("../../EotU.jpg"), caption: "", )<odd_subfigs_d>],
-      [#figure(image("../../EotU.jpg"), caption: "", )<odd_subfigs_e>],
+      [#figure(image("../images/EotU.jpg"), caption: "", )<odd_subfigs_d>],
+      [#figure(image("../images/EotU.jpg"), caption: "", )<odd_subfigs_e>],
          
     )
   ],  
@@ -159,7 +159,7 @@ You can also include images and math equations in the table. The table will auto
     [], table.cell(colspan: 2)[#align(center)[*Shai-Hulud* recommends]], 
     table.hline(start: 1),
     [Spice], [1 sniff], [10 sniffs],
-    [#image("../../logo-thi.jpg", width: 30%)], [10 courses],[#text()[$ integral_0^infinity x / ((sin(x)/d) +2 )    d x $]],
+    [#image("../images/logo-thi.jpg", width: 30%)], [10 courses],[#text()[$ integral_0^infinity x / ((sin(x)/d) +2 )    d x $]],
       [McRib], [1 McRib], [1 McRib],
       [Table], [#small_tab], [#box(fill: blue)[#small_tab]]
   ),
