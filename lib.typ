@@ -2,7 +2,8 @@
 #import "@preview/subpar:0.2.1"
 #import "@preview/physica:0.9.5": *
 #import "@preview/glossarium:0.5.4": make-glossary, register-glossary
-#import "@preview/codly:1.2.0": *
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.8" : *
 #import "@preview/ctheorems:1.1.3": *
 
 // Internal modules
@@ -11,6 +12,8 @@
 #import "modules/epigraph.typ" : generate-epigraph,
 #import "modules/acknowledgements.typ" : generate-acknowledgements,
 #import "modules/abbreviations.typ" : abbreviations-page,
+
+#let std-bibliography = bibliography
 
 #let in-appendix = state("in-appendix", false)
 #let in-outline = state("in-outline", false)
@@ -121,12 +124,13 @@
 }
 
 // Main matter styling rules
-#let main-matter(body) = {
+#let main-matter(author: [], body) = {
   set text(number-type: "old-style")
   set page(
     numbering: "1",
     // show nubmering (footer) when NO header chapter header present
     footer: context {
+      line(start: (0% + 0pt, 0% + 0pt), end: (100% + 0pt, 0% + 0pt), stroke: 0.25pt + fill-color-gray)
       let chapters = heading.where(level: 1)
       if query(chapters).any(it => it.location().page() == here().page()) {
         align(
@@ -136,12 +140,13 @@
             fill: fill-color-gray,
             font: "XCharter",
             size: 8pt,
-            counter(page).display()  
-          ),
+          )[#grid(columns: (1fr,1fr,1fr),[#author],[#counter(page).display()])]
+          // [#align(center)[#counter(page).display()]],
         )
       } else {
         none
       }
+      
     },
   )
   counter(page).update(0)
@@ -210,7 +215,60 @@
   })
   register-glossary(abbrs)
 
+  show: codly-init.with()
+  codly(
+    languages: (
+      rust: (name: "Rust", icon: "🦀", color: rgb("#CE412B"))// color: rgb("#CE412B")),
+      ),
+    header: [src/main.rs],  
+    inset: 0.001cm,
+    lang-outset: (x: -5pt, y: 5pt), 
+  )
   
+  // codly(display-name: false) //, lang-stroke: 
+  // codly(zebra-fill: none)
+  
+  // codly(zebra-fill: none)
+  // codly(languages: codly-languages) //, lang-fill: none, lang-stroke: none, lang-radius: 0pt,)
+  // codly(display-icon: true)
+  
+  // fill-color-gray, lang-radius: 0pt)
+
+  show regex("\d?\dth"): w => {
+    // 26th, ...
+    let b = w.text.split(regex("th")).join()
+    [#b#super([th])]
+  }
+
+  
+  show regex("\d?\dst"): w => {
+    // 1st
+    let b = w.text.split(regex("st")).join()
+    [#b#super([st])]
+  }
+  
+  show regex("\d?\d[nr]d"): w => {
+    // 2nd, 3rd, ...
+    let s = w.text.split(regex("\d")).last()
+    let b = w.text.split(regex("[nr]d")).join()
+    [#b#super(s)]
+  }
+
+   // If we find in bibentries some ISBN, we add link to it
+  show "https://doi.org/": w => {
+    // handle DOIs
+    [DOI:] + str.from-unicode(160) // 160 A0 nbsp
+  }
+  show regex("ISBN \d+"): w => {
+    let s = w.text.split().last()
+    link(
+      "https://isbnsearch.org/isbn/" + s,
+      w,
+    ) // https://isbnsearch.org/isbn/1-891562-35-5
+  }
+
+  // Hanging indent for footnote
+  show footnote.entry: set par(hanging-indent: 1.5em)
 
   // General Document specifics
   set text(font: ("XCharter"), size: 11pt)
@@ -218,8 +276,8 @@
   set page(
     paper: "a4",
     margin: (
-      bottom: 5cm,
-      top: 42mm,
+      bottom: 3cm,//5cm,
+      top: 3cm,//42mm,
       inside: 33.0mm,
       outside: 45mm,
     ),
@@ -641,12 +699,28 @@
   }
    
   // MAIN MATTER
-  show: main-matter
+  // let main-matter(author: author)
+  // set main-matter(author: author)
+  show: main-matter 
   body
 
 
   // BACK MATTER
+  show: back-matter
   // set text(font: "Times New Roman", size: 12pt)
+
+   if bibliography != none {
+    pagebreak()
+    // show std-bibliography: set text(0.95em)
+    show std-bibliography: set text(12pt)
+    // Use default paragraph properties for bibliography.
+    show std-bibliography: set par(
+      leading: 0.65em,
+      justify: false,
+      linebreaks: auto,
+    )
+    bibliography
+  }
 }
 
 

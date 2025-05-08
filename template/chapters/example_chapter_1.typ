@@ -44,7 +44,7 @@ In your shell of choice (e.g. CMD or PowerShell on Windows) you can run the foll
   Print detailed info and usage of a subcommand (e.g. typst watch):
   #align(center)[`typst help watch `]
 ]
-
+#pagebreak()
 == Using Typst in an IDE
 For a productive and comfortable writing experience you may want to use a code editor  which supports the @lsp to unlock code highliting, completition, formatting, refactoring... \ \
 Three recommended options:
@@ -56,7 +56,7 @@ Best language server option for Typst as of now: The #link("https://github.com/M
 
 #figure(caption: flex-caption([Using VSCode Editor for writing a Typst document. The Tinymist extension allows for syntax highliting as well as live-preview with hot-reload in keypress for instant viewing your changes.],[VSCode]))[#image("../../screenshot.png")]
 
-// #pagebreak()
+#pagebreak()
 
 == The basics about Typst syntax
 

@@ -28,14 +28,15 @@
 #let abstract-de = [
   #lorem(180) //#linebreak() #lorem(180)
 ]
+#let bib = bibliography("refs.bib", title: "Bibliography", style: "ieee", )
 
 #show: thesis.with(
   title:title,
   author: "Max Mustermann", 
   thesis-type: "Masterarbeit",
   supervisors: (
-    "Prof. Dr. Kleist", 
     "Prof. Dr. Hans-Werner Unsinn",
+    "Dr. Oetker", 
     ),
   matrikel: "123456",
   submission_date: datetime(year: 2069, month: 4, day: 20),//"01.01.2023",
@@ -45,12 +46,15 @@
   acknowledgements: acknowledgements,
   language: "de",
   abbreviations: abbreviations-list,
+  bibliography: bib,
 ) 
 
 = Introduction <chap:introduction>
 #include "./chapters/example_chapter_1.typ"
 = Figures and tables 
 #include "./chapters/figures.typ"
+= Bibliography
+#include "./chapters/chapter_on_bibliography.typ"
 #pagebreak()
 
 

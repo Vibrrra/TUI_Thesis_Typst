@@ -1,8 +1,9 @@
 #import "../utils/global.typ" : *
 #figure(
-  caption: [
-    This symbol was found at one the ruins on the Attle Rock. 
+  caption: flex-caption(
+    [This symbol was found at one the ruins on the Attle Rock. 
     According to script fragments found near the side, it represents what the Nomai refer to as the _Eye of the Universe_.], 
+    [Eye of the Universe]), 
 )[
 #image("../../EotU.jpg", width: 50%)
 ]<dd>
@@ -55,10 +56,11 @@ This way you can insert empty (`[]`) block which centers the remaining 2 subfigu
 #subpar.grid(
   columns: (1fr),
   label: <fig:odd_subfigs>,
-  caption: [
+  caption: flex-caption([
     This example shows on how to nicely center subfigures in case of having an an odd number 
     Using the `columns`-Parameter in the `#grid` function. The first colum is specified using same width factions for all three subfigures `colums(1fr, 1fr, 1fr)`. The second row specifies 4 columns with 
     `columns(1fr, 2fr, 2fr, 1fr)`. This way you can insert empty (`[]`) block which centers the remaining 2 subfigures (@odd_subfigs_d, @odd_subfigs_e ) ],
+    [Odd number of subfigures]),
   [
     #grid( columns: (1fr, 1fr, 1fr),
       [#figure(image("../../EotU.jpg"), caption: "", )<odd_subfigs_a>], 
@@ -189,8 +191,9 @@ Adding a caption registers the code bock to the List of Listings - Outline in th
   ```rust
     // This main function doesn't do shnit
     pub fn main() {
-      let g: i32 = 0;
+      let g: i32 = 0; 
       let mut aah: String = String::new();
+  
       aah.push("A");
       for i in 0..10 {
         aah.push("a");
