@@ -1,5 +1,5 @@
 [package]
-name = "modern-uit-thesis"
+name = "tui-thesis-typst"
 version = "0.8.0"
 compiler = "0.13.0"
 entrypoint = "lib.typ"
