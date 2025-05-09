@@ -1,4 +1,4 @@
-#import "../utils/global.typ": *
+#import "@local/tui-thesis-typst:0.8.0": *
 
 This is a template for Bachelor and Master thsus or any other work that requires a nice looking template for showing your scientific in written form.
 You can use this template for your own work.

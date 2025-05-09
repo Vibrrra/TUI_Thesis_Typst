@@ -1,6 +1,6 @@
 // #import "template/thesis.typ" : thesis
 // #import "utils/global.typ": thesis, LaTeX
-#import "../lib.typ": thesis, LaTeXLogo, BibTeXLogo
+#import "@local/tui-thesis-typst:0.8.0": thesis, LaTeXLogo, BibTeXLogo
 #import "abbreviations.typ": abbreviations-list
 
 #let title = [

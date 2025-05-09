@@ -15,7 +15,6 @@ The template comes with to printing flavors: one-sided and double-sided, which a
 > [!TIP] 
 > Never heard of Typst? 
 >**Typst** is markup-based type-setting system and is a modern alternative to LaTeX. 
-The te
 If you have not used Typst before, checkout there website
 [official Typst website](https://typst.app/) for reference and documentation.
 
