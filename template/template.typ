@@ -1,10 +1,11 @@
 // #import "template/thesis.typ" : thesis
 // #import "utils/global.typ": thesis, LaTeX
-#import "../lib.typ": thesis, LaTeX
+#import "../lib.typ": thesis, LaTeXLogo, BibTeXLogo
 #import "abbreviations.typ": abbreviations-list
 
 #let title = [
-    This is a very long title and complicated title for an absolutely incredible introduction to Typst - The LaTeX Killer
+    This is a very long and unnecessarily complicated title for your  absolutely incredible thesis made with Typst - The best #LaTeXLogo alternative with #BibTeXLogo\-support
+    
     // This is a very long title for an absolutely incredible thesis - not many people can deal with this
 ]
 

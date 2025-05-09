@@ -1,4 +1,4 @@
-#import "../utils/global.typ": *
+#import "@local/tui-thesis-typst:0.8.0": *
 
 It is best to organize your literature in a bibtex file (.bib).
 Using ref-code in your bib-entry you can reference the entry with the `@`-smybol like this @Meng2006@abelSimpleRobustMeasure2006@zahorikPerceptualAdaptationRoom2011

@@ -1,4 +1,4 @@
-#import "../utils/global.typ": *
+#import "@local/tui-thesis-typst:0.8.0": *
 #figure(
     caption: flex-caption(
         [This symbol was found at one the ruins on the Attle Rock.
